@@ -36,4 +36,38 @@ public class RomanNumeralTestWithBeforeEach {
         int result = roman.convert("XLIV");
         Assertions.assertEquals(44, result);
     }
+
+    @Test
+    public void complexNumber() {
+        int result = roman.convert("MCMXCIV");
+        Assertions.assertEquals(1994, result);
+    }
+
+    @Test
+    public void largestRomanNumeral() {
+        int result = roman.convert("MMMCMXCIX");
+        Assertions.assertEquals(3999, result);
+    }
+
+    @Test
+    public void invalidRomanNumeral() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> roman.convert("IIII"));
+    }
+
+    @Test
+    public void emptyString() {
+        int result = roman.convert("");
+        Assertions.assertEquals(0, result);
+    }
+
+    @Test
+    public void lowercaseInput() {
+        int result = roman.convert("ix");
+        Assertions.assertEquals(9, result);
+    }
+
+    @Test
+    public void invalidSubtractiveNotation() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> roman.convert("IC"));
+    }
 }
