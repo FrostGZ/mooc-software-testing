@@ -4,23 +4,27 @@ import org.junit.jupiter.api.Test;
 
 public class MCDCExampleTest {
 
-    public boolean expression(boolean a, boolean b, boolean c) {
-        return (a && b) || c;
+    public boolean logic(boolean A, boolean B, boolean C) {
+        return (A && B) || C;
     }
+
     @Test
-    public void test2() {
-        Assertions.assertTrue(expression(true, true, false));
+    public void test_2_TTF() {
+        Assertions.assertTrue(logic(true, true, false));
     }
+
     @Test
-    public void test3() {
-        Assertions.assertTrue(expression(true, false, true));
+    public void test_3_TFT() {
+        Assertions.assertTrue(logic(true, false, true));
     }
+
     @Test
-    public void test4() {
-        Assertions.assertFalse(expression(true, false, false));
+    public void test_4_TFF() {
+        Assertions.assertFalse(logic(true, false, false));
     }
+
     @Test
-    public void test6() {
-        Assertions.assertTrue(expression(false, true, true));
+    public void test_6_FTF() {
+        Assertions.assertFalse(logic(false, true, false));
     }
 }
