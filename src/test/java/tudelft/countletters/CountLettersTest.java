@@ -16,5 +16,22 @@ public class CountLettersTest {
         int words = new CountLetters().count("cats|dog");
         Assertions.assertEquals(1, words);
     }
+    @Test
+    public void endsWithR() {
+        int words = new CountLetters().count("bear|lion");
+        Assertions.assertEquals(1, words);
+    }
+
+    @Test
+    public void endsWithX() {
+        int words = new CountLetters().count("linux");
+        Assertions.assertEquals(1, words);
+    }
+
+    @Test
+    public void invalidSymbolBreak() {
+        int words = new CountLetters().count("dog!");
+        Assertions.assertEquals(0, words);
+    }
 
 }
