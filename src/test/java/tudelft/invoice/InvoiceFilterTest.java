@@ -1,28 +1,30 @@
 package tudelft.invoice;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import tudelft.invoicemocked.Invoice;
+import tudelft.invoicemocked.InvoiceDao;
+import tudelft.invoicemocked.InvoiceFilter;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class InvoiceFilterTest {
+
     @Test
-    void filterInvoices() {
+    public void filterInvoices() {
+        Invoice i1 = new Invoice("Cliente1", 80.0);
+        Invoice i2 = new Invoice("Cliente2", 200.0);
 
-        InvoiceDao dao = new InvoiceDao();
-        Invoice mauricio = new Invoice("Mauricio", 20.0);
-        Invoice arie = new Invoice("Arie", 300.0);
+        InvoiceDao dao = Mockito.mock(InvoiceDao.class);
+        Mockito.when(dao.all()).thenReturn(Arrays.asList(i1, i2));
 
-        dao.save(mauricio);
-        dao.save(arie);
-
-        InvoiceFilter filter = new InvoiceFilter();
+        InvoiceFilter filter = new InvoiceFilter(dao);
         List<Invoice> result = filter.filter();
 
-        Assertions.assertEquals(mauricio, result.get(0));
-        Assertions.assertEquals(1, result.size());
-
-        dao.close();
+        assertEquals(1, result.size());
+        assertEquals(i1, result.get(0));
     }
-
 }
